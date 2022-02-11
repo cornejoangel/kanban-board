@@ -5,7 +5,7 @@ import Card from './Card';
 import '../styles/List.scss';
 
 const List = (props) => {
-  const { id, title } = props;
+  const { id, title, changeTitle } = props;
   const [cards, setCards] = useState([]);
 
   const createCard = () => {
@@ -15,18 +15,25 @@ const List = (props) => {
 
   let list = '';
   list = (
-    <ul className="list">
-      {cards.map(() => (
-        <li key={uniqid()}>
-          <Card />
+    <div className="list">
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => changeTitle(id, e.target.value)}
+      />
+      <ul>
+        {cards.map(() => (
+          <li key={uniqid()}>
+            <Card />
+          </li>
+        ))}
+        <li>
+          <button type="button" className="card-creator" onClick={createCard}>
+            +Card
+          </button>
         </li>
-      ))}
-      <li>
-        <button type="button" className="card-creator" onClick={createCard}>
-          +Card
-        </button>
-      </li>
-    </ul>
+      </ul>
+    </div>
   );
   return list;
 };
@@ -34,6 +41,7 @@ const List = (props) => {
 List.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
+  changeTitle: PropTypes.func,
 };
 
 export default List;

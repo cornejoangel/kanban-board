@@ -12,13 +12,24 @@ const App = () => {
     setLists(lists.concat(newList));
   };
 
+  const changeTitle = (id, value) => {
+    setLists(
+      lists.map((list) => {
+        if (list.id === id) {
+          list.title = value;
+        }
+        return list;
+      })
+    );
+  };
+
   let board = '';
   board = (
     <main>
       <ul className="board">
         {lists.map((list) => (
           <li key={list.id}>
-            <List id={list.id} title={list.title} />
+            <List id={list.id} title={list.title} changeTitle={changeTitle} />
           </li>
         ))}
         <li>
