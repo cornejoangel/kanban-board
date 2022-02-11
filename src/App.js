@@ -8,17 +8,17 @@ const App = () => {
   const [lists, setLists] = useState([]);
 
   const createList = () => {
-    const newList = <List />;
+    const newList = { id: uniqid(), title: '' };
     setLists(lists.concat(newList));
   };
 
   let board = '';
   board = (
     <main>
-      <ul className="list-container">
-        {lists.map(() => (
-          <li key={uniqid()}>
-            <List />
+      <ul className="board">
+        {lists.map((list) => (
+          <li key={list.id}>
+            <List id={list.id} title={list.title} />
           </li>
         ))}
         <li>

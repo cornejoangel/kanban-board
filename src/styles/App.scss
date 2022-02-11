@@ -6,6 +6,8 @@ main {
   ul {
     list-style: none;
     padding: 0;
+  }
+  .board {
     position: absolute;
     overflow-x: auto;
     overflow-y: hidden;
