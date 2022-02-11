@@ -3,6 +3,23 @@ body {
 }
 
 main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  
+    li {
+      width: auto;
+      width: fit-content;
+    }
+  }
+
+}
+
+.list-creator {
+  width: min-content;
+  height: min-content;
+  align-self: center;
 }
