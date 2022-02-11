@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import List from './components/List';
+import './styles/normalize.css';
 import './styles/App.scss';
 
 const App = () => {
