@@ -3,13 +3,16 @@ body {
 }
 
 main {
-
   ul {
     list-style: none;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  
+    position: absolute;
+    overflow-x: auto;
+    overflow-y: hidden;
+    user-select: none;
+    white-space: nowrap;
+    display: flex;
+
     li {
       width: auto;
       width: fit-content;
