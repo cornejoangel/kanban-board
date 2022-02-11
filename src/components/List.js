@@ -9,8 +9,19 @@ const List = (props) => {
   const [cards, setCards] = useState([]);
 
   const createCard = () => {
-    const newCard = <Card />;
+    const newCard = { id: uniqid(), name: '' };
     setCards(cards.concat(newCard));
+  };
+
+  const changeName = (cardID, value) => {
+    setCards(
+      cards.map((card) => {
+        if (card.id === cardID) {
+          card.name = value;
+        }
+        return card;
+      })
+    );
   };
 
   let list = '';
@@ -22,9 +33,9 @@ const List = (props) => {
         onChange={(e) => changeTitle(id, e.target.value)}
       />
       <ul>
-        {cards.map(() => (
-          <li key={uniqid()}>
-            <Card />
+        {cards.map((card) => (
+          <li key={card.id}>
+            <Card id={card.id} name={card.name} changeName={changeName} />
           </li>
         ))}
         <li>

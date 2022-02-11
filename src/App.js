@@ -12,10 +12,10 @@ const App = () => {
     setLists(lists.concat(newList));
   };
 
-  const changeTitle = (id, value) => {
+  const changeTitle = (listID, value) => {
     setLists(
       lists.map((list) => {
-        if (list.id === id) {
+        if (list.id === listID) {
           list.title = value;
         }
         return list;
