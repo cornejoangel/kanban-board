@@ -1,10 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
+import ReactModal from 'react-modal';
 import '../styles/Card.scss';
 
 const Card = () => {
   const [editingName, setEditingName] = useState(false);
   const [name, setName] = useState('');
+  const [showMore, setShowMore] = useState(false);
   const nameInput = useRef(null);
+
+  const openMore = () => {
+    setShowMore(true);
+  };
+
+  const closeMore = () => {
+    setShowMore(false);
+  };
 
   useEffect(() => {
     if (editingName) {
@@ -36,12 +46,27 @@ const Card = () => {
           onBlur={stopEditName}
         />
       )}
-      {!editingName && <div className="name-wrapper">{name}</div>}
+      {!editingName && (
+        <button type="button" className="name-wrapper" onClick={openMore}>
+          {name}
+        </button>
+      )}
       {!editingName && (
         <button type="button" onClick={startEditName}>
           edit
         </button>
       )}
+      <ReactModal
+        isOpen={showMore}
+        shouldCloseOnOverlayClick
+        shouldCloseOnEsc
+        onRequestClose={closeMore}
+        ariaHideApp={!showMore}
+      >
+        <button type="button" onClick={closeMore}>
+          close
+        </button>
+      </ReactModal>
     </div>
   );
   return card;
