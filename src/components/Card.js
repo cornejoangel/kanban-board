@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import '../styles/Card.scss';
 
-const Card = (props) => {
-  const { id, name, changeName } = props;
+const Card = () => {
   const [editingName, setEditingName] = useState(false);
+  const [name, setName] = useState('');
 
   const startEditName = () => {
     setEditingName(true);
@@ -14,6 +13,10 @@ const Card = (props) => {
     setEditingName(false);
   };
 
+  const changeName = (value) => {
+    setName(value);
+  };
+
   let card = '';
   card = (
     <div className="card">
@@ -21,7 +24,7 @@ const Card = (props) => {
         <input
           type="text"
           value={name}
-          onChange={(e) => changeName(id, e.target.value)}
+          onChange={(e) => changeName(e.target.value)}
           onBlur={stopEditName}
         />
       )}
@@ -34,12 +37,6 @@ const Card = (props) => {
     </div>
   );
   return card;
-};
-
-Card.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  changeName: PropTypes.func,
 };
 
 export default Card;

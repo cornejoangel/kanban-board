@@ -12,19 +12,8 @@ const List = () => {
   };
 
   const createCard = () => {
-    const newCard = { id: uniqid(), name: '' };
+    const newCard = { id: uniqid() };
     setCards(cards.concat(newCard));
-  };
-
-  const changeName = (cardID, value) => {
-    setCards(
-      cards.map((card) => {
-        if (card.id === cardID) {
-          card.name = value;
-        }
-        return card;
-      })
-    );
   };
 
   let list = '';
@@ -38,7 +27,7 @@ const List = () => {
       <ul>
         {cards.map((card) => (
           <li key={card.id}>
-            <Card id={card.id} name={card.name} changeName={changeName} />
+            <Card />
           </li>
         ))}
         <li>
