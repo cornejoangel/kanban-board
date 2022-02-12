@@ -12,6 +12,10 @@ const App = () => {
     setLists(lists.concat(newList));
   };
 
+  const deleteList = (deleteID) => {
+    setLists(lists.filter((list) => list.id !== deleteID));
+  };
+
   let board = '';
   board = (
     <main>
@@ -19,6 +23,9 @@ const App = () => {
         {lists.map((list) => (
           <li key={list.id}>
             <List />
+            <button type="button" onClick={() => deleteList(list.id)}>
+              X
+            </button>
           </li>
         ))}
         <li>

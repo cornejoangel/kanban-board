@@ -16,8 +16,8 @@ const List = () => {
     setCards(cards.concat(newCard));
   };
 
-  const deleteCard = (removeID) => {
-    setCards(cards.filter((card) => card.id !== removeID));
+  const deleteCard = (deleteID) => {
+    setCards(cards.filter((card) => card.id !== deleteID));
   };
 
   let list = '';
