@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '../styles/Card.scss';
 
 const Card = () => {
   const [editingName, setEditingName] = useState(false);
   const [name, setName] = useState('');
+  const nameInput = useRef(null);
+
+  useEffect(() => {
+    if (editingName) {
+      nameInput.current.focus();
+    }
+  });
 
   const startEditName = () => {
     setEditingName(true);
@@ -23,6 +30,7 @@ const Card = () => {
       {editingName && (
         <input
           type="text"
+          ref={nameInput}
           value={name}
           onChange={(e) => changeName(e.target.value)}
           onBlur={stopEditName}
