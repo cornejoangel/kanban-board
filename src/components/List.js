@@ -16,6 +16,10 @@ const List = () => {
     setCards(cards.concat(newCard));
   };
 
+  const deleteCard = (removeID) => {
+    setCards(cards.filter((card) => card.id !== removeID));
+  };
+
   let list = '';
   list = (
     <div className="list">
@@ -28,6 +32,9 @@ const List = () => {
         {cards.map((card) => (
           <li key={card.id}>
             <Card />
+            <button type="button" onClick={() => deleteCard(card.id)}>
+              X
+            </button>
           </li>
         ))}
         <li>
