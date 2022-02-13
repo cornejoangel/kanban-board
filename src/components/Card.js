@@ -1,10 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactModal from 'react-modal';
+import PropTypes from 'prop-types';
 import '../styles/Card.scss';
 
-const Card = () => {
-  const [editingName, setEditingName] = useState(false);
-  const [name, setName] = useState('');
+const Card = (props) => {
+  const {
+    id,
+    title,
+    editingTitle,
+    startEditCardTitle,
+    stopEditCardTitle,
+    changeCardTitle,
+  } = props;
   const [showMore, setShowMore] = useState(false);
   const nameInput = useRef(null);
 
@@ -17,42 +24,30 @@ const Card = () => {
   };
 
   useEffect(() => {
-    if (editingName) {
+    if (editingTitle) {
       nameInput.current.focus();
     }
   });
 
-  const startEditName = () => {
-    setEditingName(true);
-  };
-
-  const stopEditName = () => {
-    setEditingName(false);
-  };
-
-  const changeName = (value) => {
-    setName(value);
-  };
-
   let card = '';
   card = (
     <div className="card">
-      {editingName && (
+      {editingTitle && (
         <input
           type="text"
           ref={nameInput}
-          value={name}
-          onChange={(e) => changeName(e.target.value)}
-          onBlur={stopEditName}
+          value={title}
+          onChange={(e) => changeCardTitle(id, e.target.value)}
+          onBlur={() => stopEditCardTitle(id)}
         />
       )}
-      {!editingName && (
+      {!editingTitle && (
         <button type="button" className="name-wrapper" onClick={openMore}>
-          {name}
+          {title}
         </button>
       )}
-      {!editingName && (
-        <button type="button" onClick={startEditName}>
+      {!editingTitle && (
+        <button type="button" onClick={() => startEditCardTitle(id)}>
           edit
         </button>
       )}
@@ -70,6 +65,15 @@ const Card = () => {
     </div>
   );
   return card;
+};
+
+Card.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  editingTitle: PropTypes.bool,
+  startEditCardTitle: PropTypes.func,
+  stopEditCardTitle: PropTypes.func,
+  changeTitle: PropTypes.func,
 };
 
 export default Card;
