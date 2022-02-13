@@ -1,63 +1,20 @@
-import React, { useState } from 'react';
-import uniqid from 'uniqid';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Card from './Card';
 import '../styles/List.scss';
 
-const List = () => {
-  const [title, setTitle] = useState('');
-  const [cards, setCards] = useState([]);
-
-  const changeTitle = (value) => {
-    setTitle(value);
-  };
-
-  const createCard = () => {
-    const newCard = { id: uniqid(), title: '', editingTitle: true };
-    setCards(cards.concat(newCard));
-  };
-
-  const deleteCard = (deleteID) => {
-    setCards(cards.filter((card) => card.id !== deleteID));
-  };
-
-  const startEditCardTitle = (id) => {
-    setCards(
-      cards.map((card) => {
-        if (card.id === id) {
-          card.editingTitle = true;
-        }
-        return card;
-      })
-    );
-  };
-
-  const stopEditCardTitle = (id) => {
-    const c = { ...cards.find((card) => card.id === id) };
-    if (c.title === '') {
-      deleteCard(id);
-      return;
-    }
-
-    setCards(
-      cards.map((card) => {
-        if (card.id === id) {
-          card.editingTitle = false;
-        }
-        return card;
-      })
-    );
-  };
-
-  const changeCardTitle = (id, value) => {
-    setCards(
-      cards.map((card) => {
-        if (card.id === id) {
-          card.title = value;
-        }
-        return card;
-      })
-    );
-  };
+const List = (props) => {
+  const {
+    id,
+    title,
+    changeListTitle,
+    cards,
+    createCard,
+    deleteCard,
+    startEditCardTitle,
+    stopEditCardTitle,
+    changeCardTitle,
+  } = props;
 
   let list = '';
   list = (
@@ -65,7 +22,7 @@ const List = () => {
       <input
         type="text"
         value={title}
-        onChange={(e) => changeTitle(e.target.value)}
+        onChange={(e) => changeListTitle(id, e.target.value)}
       />
       <ul>
         {cards.map((card) => (
@@ -84,7 +41,11 @@ const List = () => {
           </li>
         ))}
         <li>
-          <button type="button" className="card-creator" onClick={createCard}>
+          <button
+            type="button"
+            className="card-creator"
+            onClick={() => createCard(id)}
+          >
             +Card
           </button>
         </li>
@@ -94,4 +55,15 @@ const List = () => {
   return list;
 };
 
+Card.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  changeListTitle: PropTypes.func,
+  cards: PropTypes.array,
+  createCard: PropTypes.func,
+  deleteCard: PropTypes.func,
+  startEditCardTitle: PropTypes.func,
+  stopEditCardTitle: PropTypes.func,
+  changeCardTitle: PropTypes.func,
+};
 export default List;
