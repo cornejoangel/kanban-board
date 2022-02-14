@@ -16,6 +16,7 @@ const List = (props) => {
     changeCardTitle,
     editing,
     editingList,
+    editingEmpty,
   } = props;
 
   let list = '';
@@ -45,9 +46,11 @@ const List = (props) => {
         <li>
           <button
             type="button"
-            className="card-creator"
+            className={`card-creator ${
+              !editingEmpty && editingList === id ? 'save-card' : ''
+            }`}
             onClick={() => createCard(id)}
-            disabled={editing && editingList === id}
+            disabled={editing && editingList === id && editingEmpty}
           >
             +Card
           </button>
@@ -70,5 +73,6 @@ Card.propTypes = {
   changeCardTitle: PropTypes.func,
   editing: PropTypes.bool,
   editingList: PropTypes.string,
+  editingEmpty: PropTypes.bool,
 };
 export default List;

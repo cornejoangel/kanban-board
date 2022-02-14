@@ -9,6 +9,7 @@ const App = () => {
   const [cards, setCards] = useState([]);
   const [editing, setEditing] = useState(false);
   const [editingList, setEditingList] = useState('');
+  const [editingEmpty, setEditingEmpty] = useState(true);
 
   const createList = () => {
     const newList = { id: uniqid(), title: '' };
@@ -35,6 +36,7 @@ const App = () => {
     setCards(cards.concat(newCard));
     setEditing(true);
     setEditingList(listID);
+    setEditingEmpty(true);
   };
 
   const deleteCard = (cardID) => {
@@ -80,6 +82,11 @@ const App = () => {
         return card;
       })
     );
+
+    const c = cards.find((card) => card.id === id);
+    if (c.title !== '') {
+      setEditingEmpty(false);
+    }
   };
 
   let board = '';
@@ -100,6 +107,7 @@ const App = () => {
               changeCardTitle={changeCardTitle}
               editing={editing}
               editingList={editingList}
+              editingEmpty={editingEmpty}
             />
             <button type="button" onClick={() => deleteList(list.id)}>
               X
