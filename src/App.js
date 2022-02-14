@@ -7,6 +7,8 @@ import './styles/App.scss';
 const App = () => {
   const [lists, setLists] = useState([]);
   const [cards, setCards] = useState([]);
+  const [editing, setEditing] = useState(false);
+  const [editingList, setEditingList] = useState('');
 
   const createList = () => {
     const newList = { id: uniqid(), title: '' };
@@ -31,6 +33,8 @@ const App = () => {
   const createCard = (listID) => {
     const newCard = { listID, id: uniqid(), title: '', editingTitle: true };
     setCards(cards.concat(newCard));
+    setEditing(true);
+    setEditingList(listID);
   };
 
   const deleteCard = (cardID) => {
@@ -49,6 +53,8 @@ const App = () => {
   };
 
   const stopEditCardTitle = (id) => {
+    setEditing(false);
+    setEditingList('');
     const c = { ...cards.find((card) => card.id === id) };
     if (c.title === '') {
       deleteCard(id);
@@ -92,6 +98,8 @@ const App = () => {
               startEditCardTitle={startEditCardTitle}
               stopEditCardTitle={stopEditCardTitle}
               changeCardTitle={changeCardTitle}
+              editing={editing}
+              editingList={editingList}
             />
             <button type="button" onClick={() => deleteList(list.id)}>
               X

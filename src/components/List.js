@@ -14,6 +14,8 @@ const List = (props) => {
     startEditCardTitle,
     stopEditCardTitle,
     changeCardTitle,
+    editing,
+    editingList,
   } = props;
 
   let list = '';
@@ -45,6 +47,7 @@ const List = (props) => {
             type="button"
             className="card-creator"
             onClick={() => createCard(id)}
+            disabled={editing && editingList === id}
           >
             +Card
           </button>
@@ -65,5 +68,7 @@ Card.propTypes = {
   startEditCardTitle: PropTypes.func,
   stopEditCardTitle: PropTypes.func,
   changeCardTitle: PropTypes.func,
+  editing: PropTypes.bool,
+  editingList: PropTypes.string,
 };
 export default List;
