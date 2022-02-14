@@ -14,6 +14,7 @@ const Card = (props) => {
   } = props;
   const [showMore, setShowMore] = useState(false);
   const nameInput = useRef(null);
+  const [description, setDescription] = useState('');
 
   const openMore = () => {
     setShowMore(true);
@@ -21,6 +22,10 @@ const Card = (props) => {
 
   const closeMore = () => {
     setShowMore(false);
+  };
+
+  const changeDescription = (value) => {
+    setDescription(value);
   };
 
   useEffect(() => {
@@ -58,6 +63,11 @@ const Card = (props) => {
         onRequestClose={closeMore}
         ariaHideApp={!showMore}
       >
+        <textarea
+          value={description}
+          className="description"
+          onChange={(e) => changeDescription(e.target.value)}
+        />
         <button type="button" onClick={closeMore}>
           close
         </button>
