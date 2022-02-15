@@ -91,35 +91,30 @@ const App = () => {
 
   let board = '';
   board = (
-    <main>
-      <ul className="board">
+    <main className="board">
+      <ul className="list-column">
         {lists.map((list) => (
-          <li key={list.id}>
-            <List
-              id={list.id}
-              title={list.title}
-              changeListTitle={changeListTitle}
-              cards={cards.filter((card) => card.listID === list.id)}
-              createCard={createCard}
-              deleteCard={deleteCard}
-              startEditCardTitle={startEditCardTitle}
-              stopEditCardTitle={stopEditCardTitle}
-              changeCardTitle={changeCardTitle}
-              editing={editing}
-              editingList={editingList}
-              editingEmpty={editingEmpty}
-            />
-            <button type="button" onClick={() => deleteList(list.id)}>
-              X
-            </button>
-          </li>
+          <List
+            key={list.id}
+            id={list.id}
+            title={list.title}
+            changeListTitle={changeListTitle}
+            cards={cards.filter((card) => card.listID === list.id)}
+            createCard={createCard}
+            deleteCard={deleteCard}
+            startEditCardTitle={startEditCardTitle}
+            stopEditCardTitle={stopEditCardTitle}
+            changeCardTitle={changeCardTitle}
+            editing={editing}
+            editingList={editingList}
+            editingEmpty={editingEmpty}
+            deleteList={deleteList}
+          />
         ))}
-        <li>
-          <button type="button" className="list-creator" onClick={createList}>
-            +List
-          </button>
-        </li>
       </ul>
+      <button type="button" className="list-creator" onClick={createList}>
+        +List
+      </button>
     </main>
   );
   return board;

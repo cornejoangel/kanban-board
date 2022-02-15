@@ -2,35 +2,34 @@ body {
   font-size: 16px;
 }
 
-main {
+.board {
+  position: absolute;
+  overflow-x: auto;
+  overflow-y: hidden;
+  user-select: none;
+  white-space: nowrap;
+  display: flex;
+  margin: 0;
+  background-color: #bad;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+
   ul {
     list-style: none;
     padding: 0;
   }
-  .board {
-    position: absolute;
-    overflow-x: auto;
-    overflow-y: hidden;
-    user-select: none;
-    white-space: nowrap;
-    display: flex;
-    margin: 0;
-    background-color: #bad;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+}
 
-    li {
-      width: auto;
-      width: fit-content;
-    }
-  }
-
+.list-column {
+  display: flex;
+  margin: 0;
 }
 
 .list-creator {
   width: min-content;
   height: min-content;
-  align-self: center;
+  margin: 1em;
 }

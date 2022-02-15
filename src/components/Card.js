@@ -11,6 +11,7 @@ const Card = (props) => {
     startEditCardTitle,
     stopEditCardTitle,
     changeCardTitle,
+    deleteCard,
   } = props;
   const [showMore, setShowMore] = useState(false);
   const nameInput = useRef(null);
@@ -36,7 +37,7 @@ const Card = (props) => {
 
   let card = '';
   card = (
-    <div className="card">
+    <li className="card">
       {editingTitle && (
         <input
           type="text"
@@ -56,6 +57,9 @@ const Card = (props) => {
           edit
         </button>
       )}
+      <button type="button" onClick={() => deleteCard(id)}>
+        X
+      </button>
       <ReactModal
         isOpen={showMore}
         shouldCloseOnOverlayClick
@@ -72,7 +76,7 @@ const Card = (props) => {
           close
         </button>
       </ReactModal>
-    </div>
+    </li>
   );
   return card;
 };
@@ -84,6 +88,7 @@ Card.propTypes = {
   startEditCardTitle: PropTypes.func,
   stopEditCardTitle: PropTypes.func,
   changeTitle: PropTypes.func,
+  deleteCard: PropTypes.func,
 };
 
 export default Card;

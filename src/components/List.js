@@ -1,6 +1,8 @@
 import React from 'react';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
 import Card from './Card';
+import '../styles/App.scss';
 import '../styles/List.scss';
 
 const List = (props) => {
@@ -17,11 +19,20 @@ const List = (props) => {
     editing,
     editingList,
     editingEmpty,
+    deleteList,
   } = props;
+
+  // const handleListDrag = (result) => {
+  //   console.log(result);
+  //   const tempLists = JSON.parse(JSON.stringify(lists));
+  //   const [temp] = tempLists.splice(result.source.index, 1);
+  //   tempLists.splice(result.destination.index, 0, temp);
+  //   setLists(tempLists);
+  // };
 
   let list = '';
   list = (
-    <div className="list">
+    <li className="list">
       <input
         type="text"
         value={title}
@@ -29,34 +40,32 @@ const List = (props) => {
       />
       <ul>
         {cards.map((card) => (
-          <li key={card.id}>
-            <Card
-              id={card.id}
-              title={card.title}
-              editingTitle={card.editingTitle}
-              startEditCardTitle={startEditCardTitle}
-              stopEditCardTitle={stopEditCardTitle}
-              changeCardTitle={changeCardTitle}
-            />
-            <button type="button" onClick={() => deleteCard(card.id)}>
-              X
-            </button>
-          </li>
+          <Card
+            key={card.id}
+            id={card.id}
+            title={card.title}
+            editingTitle={card.editingTitle}
+            startEditCardTitle={startEditCardTitle}
+            stopEditCardTitle={stopEditCardTitle}
+            changeCardTitle={changeCardTitle}
+            deleteCard={deleteCard}
+          />
         ))}
-        <li>
-          <button
-            type="button"
-            className={`card-creator ${
-              !editingEmpty && editingList === id ? 'save-card' : ''
-            }`}
-            onClick={() => createCard(id)}
-            disabled={editing && editingList === id && editingEmpty}
-          >
-            +Card
-          </button>
-        </li>
       </ul>
-    </div>
+      <button
+        type="button"
+        className={`card-creator ${
+          !editingEmpty && editingList === id ? 'save-card' : ''
+        }`}
+        onClick={() => createCard(id)}
+        disabled={editing && editingList === id && editingEmpty}
+      >
+        +Card
+      </button>
+      <button type="button" onClick={() => deleteList(id)}>
+        X
+      </button>
+    </li>
   );
   return list;
 };
@@ -74,5 +83,6 @@ Card.propTypes = {
   editing: PropTypes.bool,
   editingList: PropTypes.string,
   editingEmpty: PropTypes.bool,
+  deleteList: PropTypes.func,
 };
 export default List;
