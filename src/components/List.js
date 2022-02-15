@@ -20,52 +20,54 @@ const List = (props) => {
     editingList,
     editingEmpty,
     deleteList,
+    index,
   } = props;
-
-  // const handleListDrag = (result) => {
-  //   console.log(result);
-  //   const tempLists = JSON.parse(JSON.stringify(lists));
-  //   const [temp] = tempLists.splice(result.source.index, 1);
-  //   tempLists.splice(result.destination.index, 0, temp);
-  //   setLists(tempLists);
-  // };
 
   let list = '';
   list = (
-    <li className="list">
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => changeListTitle(id, e.target.value)}
-      />
-      <ul>
-        {cards.map((card) => (
-          <Card
-            key={card.id}
-            id={card.id}
-            title={card.title}
-            editingTitle={card.editingTitle}
-            startEditCardTitle={startEditCardTitle}
-            stopEditCardTitle={stopEditCardTitle}
-            changeCardTitle={changeCardTitle}
-            deleteCard={deleteCard}
+    <Draggable draggableId={id} index={index}>
+      {(provided) => (
+        <li
+          className="list"
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => changeListTitle(id, e.target.value)}
           />
-        ))}
-      </ul>
-      <button
-        type="button"
-        className={`card-creator ${
-          !editingEmpty && editingList === id ? 'save-card' : ''
-        }`}
-        onClick={() => createCard(id)}
-        disabled={editing && editingList === id && editingEmpty}
-      >
-        +Card
-      </button>
-      <button type="button" onClick={() => deleteList(id)}>
-        X
-      </button>
-    </li>
+          <ul>
+            {cards.map((card) => (
+              <Card
+                key={card.id}
+                id={card.id}
+                title={card.title}
+                editingTitle={card.editingTitle}
+                startEditCardTitle={startEditCardTitle}
+                stopEditCardTitle={stopEditCardTitle}
+                changeCardTitle={changeCardTitle}
+                deleteCard={deleteCard}
+              />
+            ))}
+          </ul>
+          <button
+            type="button"
+            className={`card-creator ${
+              !editingEmpty && editingList === id ? 'save-card' : ''
+            }`}
+            onClick={() => createCard(id)}
+            disabled={editing && editingList === id && editingEmpty}
+          >
+            +Card
+          </button>
+          <button type="button" onClick={() => deleteList(id)}>
+            X
+          </button>
+        </li>
+      )}
+    </Draggable>
   );
   return list;
 };
@@ -84,5 +86,6 @@ Card.propTypes = {
   editingList: PropTypes.string,
   editingEmpty: PropTypes.bool,
   deleteList: PropTypes.func,
+  index: PropTypes.number,
 };
 export default List;

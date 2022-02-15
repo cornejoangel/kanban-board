@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import uniqid from 'uniqid';
 import List from './components/List';
 import './styles/normalize.css';
@@ -89,29 +90,49 @@ const App = () => {
     }
   };
 
+  const handleListDrag = (result) => {
+    if (!result.destination) return;
+    const tempLists = JSON.parse(JSON.stringify(lists));
+    const [temp] = tempLists.splice(result.source.index, 1);
+    tempLists.splice(result.destination.index, 0, temp);
+    setLists(tempLists);
+  };
+
   let board = '';
   board = (
     <main className="board">
-      <ul className="list-column">
-        {lists.map((list) => (
-          <List
-            key={list.id}
-            id={list.id}
-            title={list.title}
-            changeListTitle={changeListTitle}
-            cards={cards.filter((card) => card.listID === list.id)}
-            createCard={createCard}
-            deleteCard={deleteCard}
-            startEditCardTitle={startEditCardTitle}
-            stopEditCardTitle={stopEditCardTitle}
-            changeCardTitle={changeCardTitle}
-            editing={editing}
-            editingList={editingList}
-            editingEmpty={editingEmpty}
-            deleteList={deleteList}
-          />
-        ))}
-      </ul>
+      <DragDropContext onDragEnd={handleListDrag}>
+        <Droppable droppableId="lists" direction="horizontal">
+          {(provided) => (
+            <ul
+              className="list-column"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {lists.map((list, index) => (
+                <List
+                  key={list.id}
+                  id={list.id}
+                  title={list.title}
+                  changeListTitle={changeListTitle}
+                  cards={cards.filter((card) => card.listID === list.id)}
+                  createCard={createCard}
+                  deleteCard={deleteCard}
+                  startEditCardTitle={startEditCardTitle}
+                  stopEditCardTitle={stopEditCardTitle}
+                  changeCardTitle={changeCardTitle}
+                  editing={editing}
+                  editingList={editingList}
+                  editingEmpty={editingEmpty}
+                  deleteList={deleteList}
+                  index={index}
+                />
+              ))}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
       <button type="button" className="list-creator" onClick={createList}>
         +List
       </button>
