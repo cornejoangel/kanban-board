@@ -66,16 +66,21 @@ const List = (props) => {
               </ul>
             )}
           </Droppable>
-          <button
-            type="button"
-            className={`card-creator ${
-              !editingEmpty && editingList === id ? 'save-card' : ''
-            }`}
-            onClick={() => createCard(id)}
-            disabled={editing && editingList === id && editingEmpty}
-          >
-            +Card
-          </button>
+          {!editingEmpty && editingList === id && (
+            <button type="button" className="card-creator save-card">
+              +Card
+            </button>
+          )}
+          {(editingEmpty || editingList !== id) && (
+            <button
+              type="button"
+              className="card-creator"
+              onClick={() => createCard(id)}
+              disabled={editing && editingList === id && editingEmpty}
+            >
+              +Card
+            </button>
+          )}
           <button type="button" onClick={() => deleteList(id)}>
             X
           </button>
