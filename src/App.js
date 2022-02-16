@@ -133,7 +133,18 @@ const App = () => {
     }
     if (type === 'row' && source.droppableId === destination.droppableId) {
       // dragging a card within a list
-      console.log(result);
+      const l = { ...lists.find((list) => list.id === source.droppableId) };
+      const tempCards = JSON.parse(JSON.stringify(l.cards));
+      const [tempCard] = tempCards.splice(result.source.index, 1);
+      tempCards.splice(result.destination.index, 0, tempCard);
+      setLists(
+        lists.map((list) => {
+          if (list.id === source.droppableId) {
+            list.cards = tempCards;
+          }
+          return list;
+        })
+      );
     } else if (type === 'row') {
       // dragging a card to a different list
       console.log('different list');
