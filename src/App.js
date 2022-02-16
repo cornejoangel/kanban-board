@@ -147,7 +147,28 @@ const App = () => {
       );
     } else if (type === 'row') {
       // dragging a card to a different list
-      console.log('different list');
+      const startList = {
+        ...lists.find((list) => list.id === source.droppableId),
+      };
+      const endList = {
+        ...lists.find((list) => list.id === destination.droppableId),
+      };
+      // take the card out of its source list
+      const startCards = JSON.parse(JSON.stringify(startList.cards));
+      const [tempCard] = startCards.splice(result.source.index, 1);
+      // // move the card into its destination list
+      const endCards = JSON.parse(JSON.stringify(endList.cards));
+      endCards.splice(result.destination.index, 0, tempCard);
+      setLists(
+        lists.map((list) => {
+          if (list.id === source.droppableId) {
+            list.cards = startCards;
+          } else if (list.id === destination.droppableId) {
+            list.cards = endCards;
+          }
+          return list;
+        })
+      );
     }
   };
 
