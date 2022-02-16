@@ -21,6 +21,7 @@ const List = (props) => {
     editingEmpty,
     deleteList,
     index,
+    changeDescription,
   } = props;
 
   let list = '';
@@ -57,6 +58,8 @@ const List = (props) => {
                     deleteCard={deleteCard}
                     index={cardIndex}
                     listID={id}
+                    description={card.description}
+                    changeDescription={changeDescription}
                   />
                 ))}
                 {listProvided.placeholder}
@@ -98,5 +101,6 @@ Card.propTypes = {
   editingEmpty: PropTypes.bool,
   deleteList: PropTypes.func,
   index: PropTypes.number,
+  changeDescription: PropTypes.func,
 };
 export default List;

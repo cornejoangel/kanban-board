@@ -32,7 +32,13 @@ const App = () => {
   };
 
   const createCard = (listID) => {
-    const newCard = { listID, id: uniqid(), title: '', editingTitle: true };
+    const newCard = {
+      listID,
+      id: uniqid(),
+      title: '',
+      editingTitle: true,
+      description: '',
+    };
     setLists(
       lists.map((list) => {
         if (list.id === listID) {
@@ -120,6 +126,22 @@ const App = () => {
     }
   };
 
+  const changeDescription = (cardID, listID, value) => {
+    setLists(
+      lists.map((list) => {
+        if (list.id === listID) {
+          list.cards = list.cards.map((card) => {
+            if (card.id === cardID) {
+              card.description = value;
+            }
+            return card;
+          });
+        }
+        return list;
+      })
+    );
+  };
+
   const handleListDrag = (result) => {
     const { source, destination, type } = result;
     if (!destination) return;
@@ -200,6 +222,7 @@ const App = () => {
                   editingEmpty={editingEmpty}
                   deleteList={deleteList}
                   index={index}
+                  changeDescription={changeDescription}
                 />
               ))}
               {provided.placeholder}

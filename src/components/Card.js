@@ -15,10 +15,11 @@ const Card = (props) => {
     deleteCard,
     index,
     listID,
+    description,
+    changeDescription,
   } = props;
   const [showMore, setShowMore] = useState(false);
   const nameInput = useRef(null);
-  const [description, setDescription] = useState('');
 
   const openMore = () => {
     setShowMore(true);
@@ -26,10 +27,6 @@ const Card = (props) => {
 
   const closeMore = () => {
     setShowMore(false);
-  };
-
-  const changeDescription = (value) => {
-    setDescription(value);
   };
 
   useEffect(() => {
@@ -83,7 +80,7 @@ const Card = (props) => {
             <textarea
               value={description}
               className="description"
-              onChange={(e) => changeDescription(e.target.value)}
+              onChange={(e) => changeDescription(id, listID, e.target.value)}
             />
             <button type="button" onClick={closeMore}>
               close
@@ -106,6 +103,8 @@ Card.propTypes = {
   deleteCard: PropTypes.func,
   index: PropTypes.number,
   lisID: PropTypes.string,
+  description: PropTypes.string,
+  changeDescription: PropTypes.func,
 };
 
 export default Card;
