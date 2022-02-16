@@ -38,20 +38,31 @@ const List = (props) => {
             value={title}
             onChange={(e) => changeListTitle(id, e.target.value)}
           />
-          <ul>
-            {cards.map((card) => (
-              <Card
-                key={card.id}
-                id={card.id}
-                title={card.title}
-                editingTitle={card.editingTitle}
-                startEditCardTitle={startEditCardTitle}
-                stopEditCardTitle={stopEditCardTitle}
-                changeCardTitle={changeCardTitle}
-                deleteCard={deleteCard}
-              />
-            ))}
-          </ul>
+          <Droppable droppableId={id} direction="vertical" type="row">
+            {(listProvided) => (
+              <ul
+                className="card-list"
+                {...listProvided.droppableProps}
+                ref={listProvided.innerRef}
+              >
+                {cards.map((card, cardIndex) => (
+                  <Card
+                    key={card.id}
+                    id={card.id}
+                    title={card.title}
+                    editingTitle={card.editingTitle}
+                    startEditCardTitle={startEditCardTitle}
+                    stopEditCardTitle={stopEditCardTitle}
+                    changeCardTitle={changeCardTitle}
+                    deleteCard={deleteCard}
+                    index={cardIndex}
+                    listID={id}
+                  />
+                ))}
+                {listProvided.placeholder}
+              </ul>
+            )}
+          </Droppable>
           <button
             type="button"
             className={`card-creator ${

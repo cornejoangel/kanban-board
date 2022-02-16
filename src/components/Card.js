@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 import '../styles/Card.scss';
@@ -12,6 +13,8 @@ const Card = (props) => {
     stopEditCardTitle,
     changeCardTitle,
     deleteCard,
+    index,
+    listID,
   } = props;
   const [showMore, setShowMore] = useState(false);
   const nameInput = useRef(null);
@@ -37,46 +40,58 @@ const Card = (props) => {
 
   let card = '';
   card = (
-    <li className="card">
-      {editingTitle && (
-        <input
-          type="text"
-          ref={nameInput}
-          value={title}
-          onChange={(e) => changeCardTitle(id, e.target.value)}
-          onBlur={() => stopEditCardTitle(id)}
-        />
+    <Draggable draggableId={id} index={index}>
+      {(provided) => (
+        <li
+          className="card"
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          {editingTitle && (
+            <input
+              type="text"
+              ref={nameInput}
+              value={title}
+              onChange={(e) => changeCardTitle(id, listID, e.target.value)}
+              onBlur={() => stopEditCardTitle(id, listID)}
+            />
+          )}
+          {!editingTitle && (
+            <button type="button" className="name-wrapper" onClick={openMore}>
+              {title}
+            </button>
+          )}
+          {!editingTitle && (
+            <button
+              type="button"
+              onClick={() => startEditCardTitle(id, listID)}
+            >
+              edit
+            </button>
+          )}
+          <button type="button" onClick={() => deleteCard(id, listID)}>
+            X
+          </button>
+          <ReactModal
+            isOpen={showMore}
+            shouldCloseOnOverlayClick
+            shouldCloseOnEsc
+            onRequestClose={closeMore}
+            ariaHideApp={!showMore}
+          >
+            <textarea
+              value={description}
+              className="description"
+              onChange={(e) => changeDescription(e.target.value)}
+            />
+            <button type="button" onClick={closeMore}>
+              close
+            </button>
+          </ReactModal>
+        </li>
       )}
-      {!editingTitle && (
-        <button type="button" className="name-wrapper" onClick={openMore}>
-          {title}
-        </button>
-      )}
-      {!editingTitle && (
-        <button type="button" onClick={() => startEditCardTitle(id)}>
-          edit
-        </button>
-      )}
-      <button type="button" onClick={() => deleteCard(id)}>
-        X
-      </button>
-      <ReactModal
-        isOpen={showMore}
-        shouldCloseOnOverlayClick
-        shouldCloseOnEsc
-        onRequestClose={closeMore}
-        ariaHideApp={!showMore}
-      >
-        <textarea
-          value={description}
-          className="description"
-          onChange={(e) => changeDescription(e.target.value)}
-        />
-        <button type="button" onClick={closeMore}>
-          close
-        </button>
-      </ReactModal>
-    </li>
+    </Draggable>
   );
   return card;
 };
@@ -89,6 +104,8 @@ Card.propTypes = {
   stopEditCardTitle: PropTypes.func,
   changeTitle: PropTypes.func,
   deleteCard: PropTypes.func,
+  index: PropTypes.number,
+  lisID: PropTypes.string,
 };
 
 export default Card;

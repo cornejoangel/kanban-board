@@ -1,7 +1,6 @@
 .list {
   min-width: 300px;
   background-color: #fea;
-  display: inline-block;
   margin: 1em;
   padding: 1em;
   box-sizing: border-box;
@@ -12,4 +11,10 @@
 
 .save-card {
   background-color: skyblue;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
 }
