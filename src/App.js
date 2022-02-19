@@ -80,7 +80,7 @@ const App = () => {
   };
 
   const stopEditCardTitle = (e, cardID, listID) => {
-    if (e.key !== 'Enter') return;
+    if (e.key && e.key !== 'Enter') return;
     setEditing(false);
     setEditingList('');
     const l = { ...lists.find((list) => list.id === listID) };

@@ -46,8 +46,7 @@ const Card = (props) => {
           {...provided.dragHandleProps}
         >
           {editingTitle && (
-            <input
-              type="text"
+            <textarea
               ref={nameInput}
               value={title}
               onChange={(e) => changeCardTitle(id, listID, e.target.value)}
@@ -55,9 +54,10 @@ const Card = (props) => {
               onKeyDown={(e) => stopEditCardTitle(e, id, listID)}
             />
           )}
+          {!editingTitle && <div className="name-wrapper">{title}</div>}
           {!editingTitle && (
-            <button type="button" className="name-wrapper" onClick={openMore}>
-              {title}
+            <button type="button" onClick={openMore}>
+              more
             </button>
           )}
           {!editingTitle && (
