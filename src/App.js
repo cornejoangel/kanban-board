@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import uniqid from 'uniqid';
 import List from './components/List';
@@ -6,10 +6,20 @@ import './styles/normalize.css';
 import './styles/App.scss';
 
 const App = () => {
-  const [lists, setLists] = useState([]);
+  const [lists, setLists] = useState(() => {
+    const savedLists = localStorage.getItem('lists');
+    if (savedLists !== null) {
+      return JSON.parse(savedLists);
+    }
+    return [];
+  });
   const [editing, setEditing] = useState(false);
   const [editingList, setEditingList] = useState('');
   const [editingEmpty, setEditingEmpty] = useState(true);
+
+  useEffect(() => {
+    localStorage.setItem('lists', JSON.stringify(lists));
+  }, [lists]);
 
   const createList = () => {
     const newList = { id: uniqid(), title: '', cards: [] };
