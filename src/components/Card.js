@@ -51,7 +51,8 @@ const Card = (props) => {
               ref={nameInput}
               value={title}
               onChange={(e) => changeCardTitle(id, listID, e.target.value)}
-              onBlur={() => stopEditCardTitle(id, listID)}
+              onBlur={(e) => stopEditCardTitle(e, id, listID)}
+              onKeyDown={(e) => stopEditCardTitle(e, id, listID)}
             />
           )}
           {!editingTitle && (

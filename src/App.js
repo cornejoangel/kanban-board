@@ -79,7 +79,8 @@ const App = () => {
     );
   };
 
-  const stopEditCardTitle = (cardID, listID) => {
+  const stopEditCardTitle = (e, cardID, listID) => {
+    if (e.key !== 'Enter') return;
     setEditing(false);
     setEditingList('');
     const l = { ...lists.find((list) => list.id === listID) };
