@@ -49,28 +49,35 @@ const Card = (props) => {
             <textarea
               ref={nameInput}
               value={title}
+              className="card-name-edit"
               onChange={(e) => changeCardTitle(id, listID, e.target.value)}
               onBlur={(e) => stopEditCardTitle(e, id, listID)}
               onKeyDown={(e) => stopEditCardTitle(e, id, listID)}
             />
           )}
           {!editingTitle && <div className="name-wrapper">{title}</div>}
-          {!editingTitle && (
-            <button type="button" onClick={openMore}>
-              more
-            </button>
-          )}
-          {!editingTitle && (
+          <div className="card-buttons">
+            {!editingTitle && (
+              <button
+                type="button"
+                onClick={() => startEditCardTitle(id, listID)}
+              >
+                e
+              </button>
+            )}
+            {!editingTitle && (
+              <button type="button" onClick={openMore}>
+                m
+              </button>
+            )}
             <button
               type="button"
-              onClick={() => startEditCardTitle(id, listID)}
+              className="delete-card"
+              onClick={() => deleteCard(id, listID)}
             >
-              edit
+              X
             </button>
-          )}
-          <button type="button" onClick={() => deleteCard(id, listID)}>
-            X
-          </button>
+          </div>
           <ReactModal
             isOpen={showMore}
             shouldCloseOnOverlayClick

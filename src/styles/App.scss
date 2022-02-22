@@ -33,3 +33,9 @@ body {
   height: min-content;
   margin: 1em;
 }
+
+textarea {
+  border: none;
+  resize: none;
+  outline: none;
+}

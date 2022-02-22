@@ -1,12 +1,14 @@
+@use 'base';
 .list {
-  min-width: 300px;
+  width: 350px;
   background-color: #fea;
-  margin: 1em;
-  padding: 1em;
+  margin: 1em 0 1em 1em;
+  padding: .5em;
   box-sizing: border-box;
   display: block;
   position: relative;
   height: fit-content;
+  border-radius: base.$border-radius;
 }
 
 .save-card {
