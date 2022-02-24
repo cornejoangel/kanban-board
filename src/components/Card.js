@@ -98,7 +98,12 @@ const Card = (props) => {
               dark ? 'dark-more-overlay' : 'light-more-overlay'
             }`}
           >
-            <h2 className="more-header">{title}</h2>
+            <input
+              type="text"
+              className={`more-header ${dark ? 'dark-card' : 'light-card'}`}
+              value={title}
+              onChange={(e) => changeCardTitle(id, listID, e.target.value)}
+            />
             <textarea
               value={description}
               className={`description ${dark ? 'dark-card' : 'light-card'}`}
