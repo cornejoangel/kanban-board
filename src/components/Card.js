@@ -17,6 +17,7 @@ const Card = (props) => {
     listID,
     description,
     changeDescription,
+    dark,
   } = props;
   const [showMore, setShowMore] = useState(false);
   const nameInput = useRef(null);
@@ -117,6 +118,7 @@ Card.propTypes = {
   lisID: PropTypes.string,
   description: PropTypes.string,
   changeDescription: PropTypes.func,
+  dark: PropTypes.bool,
 };
 
 export default Card;

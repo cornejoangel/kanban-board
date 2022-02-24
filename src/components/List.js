@@ -22,6 +22,7 @@ const List = (props) => {
     deleteList,
     index,
     changeDescription,
+    dark,
   } = props;
 
   let list = '';
@@ -107,5 +108,6 @@ Card.propTypes = {
   deleteList: PropTypes.func,
   index: PropTypes.number,
   changeDescription: PropTypes.func,
+  dark: PropTypes.bool,
 };
 export default List;

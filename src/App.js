@@ -16,6 +16,7 @@ const App = () => {
   const [editing, setEditing] = useState(false);
   const [editingList, setEditingList] = useState('');
   const [editingEmpty, setEditingEmpty] = useState(true);
+  const [dark, setDark] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('lists', JSON.stringify(lists));
@@ -234,6 +235,7 @@ const App = () => {
                   deleteList={deleteList}
                   index={index}
                   changeDescription={changeDescription}
+                  dark={dark}
                 />
               ))}
               {provided.placeholder}
