@@ -21,6 +21,7 @@ const Card = (props) => {
     dark,
   } = props;
   const [showMore, setShowMore] = useState(false);
+  const [mouseOver, setMouseOver] = useState(false);
   const nameInput = useRef(null);
 
   const openMore = () => {
@@ -37,6 +38,14 @@ const Card = (props) => {
     }
   });
 
+  const handleMouseEnter = () => {
+    setMouseOver(true);
+  };
+
+  const handleMouseLeave = () => {
+    setMouseOver(false);
+  };
+
   let card = '';
   card = (
     <Draggable draggableId={id} index={index}>
@@ -46,6 +55,8 @@ const Card = (props) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          onMouseEnter={() => handleMouseEnter()}
+          onMouseLeave={() => handleMouseLeave()}
         >
           {editingTitle && (
             <textarea
@@ -58,33 +69,38 @@ const Card = (props) => {
             />
           )}
           {!editingTitle && <div className="name-wrapper">{title}</div>}
-          <div className="card-buttons">
-            {!editingTitle && (
-              <button
-                type="button"
-                className={`edit ${dark ? 'dark-card' : 'light-card'}`}
-                onClick={() => startEditCardTitle(id, listID)}
-              >
-                <MdEdit className="edit-svg" />
-              </button>
-            )}
-            {!editingTitle && (
-              <button
-                type="button"
-                className={`more ${dark ? 'dark-card' : 'light-card'}`}
-                onClick={openMore}
-              >
-                <MdOpenInFull className="more-svg" />
-              </button>
-            )}
-            <button
-              type="button"
-              className={`delete-card ${dark ? 'dark-card' : 'light-card'}`}
-              onClick={() => deleteCard(id, listID)}
-            >
-              <MdClose className="card-close-svg" />
-            </button>
-          </div>
+          {mouseOver && (
+            <div className="card-buttons">
+              {!editingTitle && (
+                <button
+                  type="button"
+                  className={`edit ${dark ? 'dark-card' : 'light-card'}`}
+                  onClick={() => startEditCardTitle(id, listID)}
+                >
+                  <MdEdit className="edit-svg" />
+                </button>
+              )}
+              {!editingTitle && (
+                <button
+                  type="button"
+                  className={`more ${dark ? 'dark-card' : 'light-card'}`}
+                  onClick={openMore}
+                >
+                  <MdOpenInFull className="more-svg" />
+                </button>
+              )}
+              {!editingTitle && (
+                <button
+                  type="button"
+                  className={`delete-card ${dark ? 'dark-card' : 'light-card'}`}
+                  onClick={() => deleteCard(id, listID)}
+                >
+                  <MdClose className="card-close-svg" />
+                </button>
+              )}
+            </div>
+          )}
+
           <ReactModal
             isOpen={showMore}
             shouldCloseOnOverlayClick
