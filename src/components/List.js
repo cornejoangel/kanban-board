@@ -105,4 +105,22 @@ const List = (props) => {
   return list;
 };
 
+List.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  changeListTitle: PropTypes.func,
+  cards: PropTypes.array,
+  createCard: PropTypes.func,
+  deleteCard: PropTypes.func,
+  startEditCardTitle: PropTypes.func,
+  stopEditCardTitle: PropTypes.func,
+  changeCardTitle: PropTypes.func,
+  editing: PropTypes.bool,
+  editingList: PropTypes.string,
+  editingEmpty: PropTypes.bool,
+  deleteList: PropTypes.func,
+  index: PropTypes.number,
+  changeDescription: PropTypes.func,
+  dark: PropTypes.bool,
+};
 export default List;
