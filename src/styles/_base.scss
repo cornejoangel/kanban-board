@@ -2,6 +2,11 @@ $border-radius: 5px;
 $button-radius: 3px;
 $light-color: #111;
 $dark-color: #eee;
+$font-main: 'Roboto', sans-serif;
+
+html {
+  font-family: $font-main;
+}
 
 button {
   border: none;
