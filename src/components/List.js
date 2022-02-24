@@ -62,6 +62,7 @@ const List = (props) => {
                     listID={id}
                     description={card.description}
                     changeDescription={changeDescription}
+                    dark={dark}
                   />
                 ))}
                 {listProvided.placeholder}

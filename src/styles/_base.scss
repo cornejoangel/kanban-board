@@ -21,6 +21,11 @@ textarea:focus {
   color: $light-color;
 }
 
+.light-header {
+  @include light;
+  background-color: #aaa;
+}
+
 .light-board {
   @include light;
   background-color: #ebebeb;

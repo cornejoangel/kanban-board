@@ -206,47 +206,64 @@ const App = () => {
     }
   };
 
+  const toggleDark = () => {
+    setDark(!dark);
+  };
+
   let board = '';
   board = (
-    <main className={`board ${dark ? 'dark-board' : 'light-board'}`}>
-      <DragDropContext onDragEnd={handleListDrag}>
-        <Droppable droppableId="lists" direction="horizontal" type="column">
-          {(provided) => (
-            <ul
-              className="list-column"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {lists.map((list, index) => (
-                <List
-                  key={list.id}
-                  id={list.id}
-                  title={list.title}
-                  changeListTitle={changeListTitle}
-                  cards={list.cards}
-                  createCard={createCard}
-                  deleteCard={deleteCard}
-                  startEditCardTitle={startEditCardTitle}
-                  stopEditCardTitle={stopEditCardTitle}
-                  changeCardTitle={changeCardTitle}
-                  editing={editing}
-                  editingList={editingList}
-                  editingEmpty={editingEmpty}
-                  deleteList={deleteList}
-                  index={index}
-                  changeDescription={changeDescription}
-                  dark={dark}
-                />
-              ))}
-              {provided.placeholder}
-            </ul>
-          )}
-        </Droppable>
-      </DragDropContext>
-      <button type="button" className="list-creator" onClick={createList}>
-        +List
-      </button>
-    </main>
+    <div>
+      <header className={dark ? 'dark-header' : 'light-header'}>
+        <button
+          type="button"
+          className={`theme-toggle ${
+            dark ? 'dark-theme-toggle' : 'light-theme-toggle'
+          }`}
+          onClick={() => toggleDark()}
+        >
+          {dark ? 'make light' : 'make dark'}
+        </button>
+      </header>
+      <main className={`board ${dark ? 'dark-board' : 'light-board'}`}>
+        <DragDropContext onDragEnd={handleListDrag}>
+          <Droppable droppableId="lists" direction="horizontal" type="column">
+            {(provided) => (
+              <ul
+                className="list-column"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {lists.map((list, index) => (
+                  <List
+                    key={list.id}
+                    id={list.id}
+                    title={list.title}
+                    changeListTitle={changeListTitle}
+                    cards={list.cards}
+                    createCard={createCard}
+                    deleteCard={deleteCard}
+                    startEditCardTitle={startEditCardTitle}
+                    stopEditCardTitle={stopEditCardTitle}
+                    changeCardTitle={changeCardTitle}
+                    editing={editing}
+                    editingList={editingList}
+                    editingEmpty={editingEmpty}
+                    deleteList={deleteList}
+                    index={index}
+                    changeDescription={changeDescription}
+                    dark={dark}
+                  />
+                ))}
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>
+        </DragDropContext>
+        <button type="button" className="list-creator" onClick={createList}>
+          +List
+        </button>
+      </main>
+    </div>
   );
   return board;
 };
