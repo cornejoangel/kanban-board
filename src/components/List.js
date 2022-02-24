@@ -1,5 +1,6 @@
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { MdClose, MdAdd } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import Card from './Card';
 import '../styles/App.scss';
@@ -77,7 +78,7 @@ const List = (props) => {
                 dark ? 'dark-list' : 'light-list'
               }`}
             >
-              +Card
+              <MdAdd className="card-creator-svg" />
             </button>
           )}
           {(editingEmpty || editingList !== id) && (
@@ -87,7 +88,7 @@ const List = (props) => {
               onClick={() => createCard(id)}
               disabled={editing && editingList === id && editingEmpty}
             >
-              +Card
+              <MdAdd className="card-creator-svg" />
             </button>
           )}
           <button
@@ -95,7 +96,7 @@ const List = (props) => {
             className={`list-close ${dark ? 'dark-list' : 'light-list'}`}
             onClick={() => deleteList(id)}
           >
-            X
+            <MdClose className="list-close-svg" />
           </button>
         </li>
       )}

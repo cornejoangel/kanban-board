@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { MdAdd } from 'react-icons/md';
 import uniqid from 'uniqid';
 import List from './components/List';
 import './styles/normalize.css';
@@ -270,7 +271,7 @@ const App = () => {
           </Droppable>
         </DragDropContext>
         <button type="button" className="list-creator" onClick={createList}>
-          +List
+          <MdAdd className="list-creator-svg" />
         </button>
       </main>
     </div>

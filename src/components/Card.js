@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import { MdClose, MdEdit, MdOpenInFull } from 'react-icons/md';
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 import '../styles/Card.scss';
@@ -64,7 +65,7 @@ const Card = (props) => {
                 className={`edit ${dark ? 'dark-card' : 'light-card'}`}
                 onClick={() => startEditCardTitle(id, listID)}
               >
-                e
+                <MdEdit className="edit-svg" />
               </button>
             )}
             {!editingTitle && (
@@ -73,7 +74,7 @@ const Card = (props) => {
                 className={`more ${dark ? 'dark-card' : 'light-card'}`}
                 onClick={openMore}
               >
-                m
+                <MdOpenInFull className="more-svg" />
               </button>
             )}
             <button
@@ -81,7 +82,7 @@ const Card = (props) => {
               className={`delete-card ${dark ? 'dark-card' : 'light-card'}`}
               onClick={() => deleteCard(id, listID)}
             >
-              X
+              <MdClose className="card-close-svg" />
             </button>
           </div>
           <ReactModal
