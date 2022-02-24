@@ -1,7 +1,6 @@
 @use 'base';
 .list {
   width: 350px;
-  background-color: #fea;
   margin: 1em 0 1em 1em;
   padding: .5em;
   box-sizing: border-box;
@@ -12,7 +11,7 @@
 }
 
 .save-card {
-  background-color: skyblue;
+  background-color: skyblue !important;
 }
 
 .card-list {

@@ -1,1 +1,52 @@
 $border-radius: 5px;
+$light-color: #111;
+
+button {
+  border: none;
+}
+
+input {
+  border: none;
+}
+
+input:focus {
+  background-color: white;
+}
+
+textarea:focus {
+  background-color: white;
+}
+
+@mixin light {
+  color: $light-color;
+}
+
+.light-board {
+  @include light;
+  background-color: #ebebeb;
+}
+
+.light-list {
+  @include light;
+  background-color: #bbb;
+}
+
+button.light-list {
+  background-color: #111;
+  color: #eee;
+}
+
+input.light-list {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.light-card {
+  @include light;
+  background-color: #ddd;
+}
+
+button.light-card {
+  border: 1px solid #444;
+  border-radius: $border-radius;
+}

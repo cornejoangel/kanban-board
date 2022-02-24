@@ -30,7 +30,7 @@ const List = (props) => {
     <Draggable draggableId={id} index={index}>
       {(provided) => (
         <li
-          className="list"
+          className={`list ${dark ? 'dark-list' : 'light-list'}`}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -38,6 +38,7 @@ const List = (props) => {
           <input
             type="text"
             value={title}
+            className={`list-title ${dark ? 'dark-list' : 'light-list'}`}
             onChange={(e) => changeListTitle(id, e.target.value)}
           />
           <Droppable droppableId={id} direction="vertical" type="row">
@@ -67,22 +68,32 @@ const List = (props) => {
               </ul>
             )}
           </Droppable>
+          {/* this is an add card button that does nothing, but has an additional class */}
           {!editingEmpty && editingList === id && (
-            <button type="button" className="card-creator save-card">
+            <button
+              type="button"
+              className={`card-creator save-card ${
+                dark ? 'dark-list' : 'light-list'
+              }`}
+            >
               +Card
             </button>
           )}
           {(editingEmpty || editingList !== id) && (
             <button
               type="button"
-              className="card-creator"
+              className={`card-creator ${dark ? 'dark-list' : 'light-list'}`}
               onClick={() => createCard(id)}
               disabled={editing && editingList === id && editingEmpty}
             >
               +Card
             </button>
           )}
-          <button type="button" onClick={() => deleteList(id)}>
+          <button
+            type="button"
+            className={`list-close ${dark ? 'dark-list' : 'light-list'}`}
+            onClick={() => deleteList(id)}
+          >
             X
           </button>
         </li>
@@ -92,22 +103,4 @@ const List = (props) => {
   return list;
 };
 
-Card.propTypes = {
-  id: PropTypes.string,
-  title: PropTypes.string,
-  changeListTitle: PropTypes.func,
-  cards: PropTypes.array,
-  createCard: PropTypes.func,
-  deleteCard: PropTypes.func,
-  startEditCardTitle: PropTypes.func,
-  stopEditCardTitle: PropTypes.func,
-  changeCardTitle: PropTypes.func,
-  editing: PropTypes.bool,
-  editingList: PropTypes.string,
-  editingEmpty: PropTypes.bool,
-  deleteList: PropTypes.func,
-  index: PropTypes.number,
-  changeDescription: PropTypes.func,
-  dark: PropTypes.bool,
-};
 export default List;

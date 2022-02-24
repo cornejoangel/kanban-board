@@ -41,7 +41,7 @@ const Card = (props) => {
     <Draggable draggableId={id} index={index}>
       {(provided) => (
         <li
-          className="card"
+          className={`card ${dark ? 'dark-card' : 'light-card'}`}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -50,7 +50,7 @@ const Card = (props) => {
             <textarea
               ref={nameInput}
               value={title}
-              className="card-name-edit"
+              className={`card-name-edit ${dark ? 'dark-card' : 'light-card'}`}
               onChange={(e) => changeCardTitle(id, listID, e.target.value)}
               onBlur={(e) => stopEditCardTitle(e, id, listID)}
               onKeyDown={(e) => stopEditCardTitle(e, id, listID)}
@@ -61,19 +61,24 @@ const Card = (props) => {
             {!editingTitle && (
               <button
                 type="button"
+                className={`edit ${dark ? 'dark-card' : 'light-card'}`}
                 onClick={() => startEditCardTitle(id, listID)}
               >
                 e
               </button>
             )}
             {!editingTitle && (
-              <button type="button" onClick={openMore}>
+              <button
+                type="button"
+                className={`more ${dark ? 'dark-card' : 'light-card'}`}
+                onClick={openMore}
+              >
                 m
               </button>
             )}
             <button
               type="button"
-              className="delete-card"
+              className={`delete-card ${dark ? 'dark-card' : 'light-card'}`}
               onClick={() => deleteCard(id, listID)}
             >
               X
@@ -85,17 +90,25 @@ const Card = (props) => {
             shouldCloseOnEsc
             onRequestClose={closeMore}
             ariaHideApp={!showMore}
-            className="more-content"
-            overlayClassName="more-overlay"
+            className={`more-content ${
+              dark ? 'dark-more-content' : 'light-more-content'
+            }`}
+            overlayClassName={`more-overlay ${
+              dark ? 'dark-more-overlay' : 'light-more-overlay'
+            }`}
           >
             <h2 className="more-header">{title}</h2>
             <textarea
               value={description}
-              className="description"
+              className={`description ${dark ? 'dark-card' : 'light-card'}`}
               placeholder="Add more detail for this card..."
               onChange={(e) => changeDescription(id, listID, e.target.value)}
             />
-            <button type="button" className="more-close" onClick={closeMore}>
+            <button
+              type="button"
+              className={`more-close ${dark ? 'dark-card' : 'light-card'}`}
+              onClick={closeMore}
+            >
               close
             </button>
           </ReactModal>

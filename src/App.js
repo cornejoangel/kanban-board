@@ -208,7 +208,7 @@ const App = () => {
 
   let board = '';
   board = (
-    <main className="board">
+    <main className={`board ${dark ? 'dark-board' : 'light-board'}`}>
       <DragDropContext onDragEnd={handleListDrag}>
         <Droppable droppableId="lists" direction="horizontal" type="column">
           {(provided) => (
