@@ -16,11 +16,21 @@ const App = () => {
   const [editing, setEditing] = useState(false);
   const [editingList, setEditingList] = useState('');
   const [editingEmpty, setEditingEmpty] = useState(true);
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(() => {
+    const savedDark = localStorage.getItem('dark');
+    if (savedDark !== null) {
+      return JSON.parse(savedDark);
+    }
+    return false;
+  });
 
   useEffect(() => {
     localStorage.setItem('lists', JSON.stringify(lists));
   }, [lists]);
+
+  useEffect(() => {
+    localStorage.setItem('dark', JSON.stringify(dark));
+  });
 
   const createList = () => {
     const newList = { id: uniqid(), title: '', cards: [] };
