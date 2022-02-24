@@ -84,13 +84,17 @@ const Card = (props) => {
             shouldCloseOnEsc
             onRequestClose={closeMore}
             ariaHideApp={!showMore}
+            className="more-content"
+            overlayClassName="more-overlay"
           >
+            <h2 className="more-header">{title}</h2>
             <textarea
               value={description}
               className="description"
+              placeholder="Add more detail for this card..."
               onChange={(e) => changeDescription(id, listID, e.target.value)}
             />
-            <button type="button" onClick={closeMore}>
+            <button type="button" className="more-close" onClick={closeMore}>
               close
             </button>
           </ReactModal>
