@@ -1,5 +1,6 @@
 $border-radius: 5px;
 $light-color: #111;
+$dark-color: #eee;
 
 button {
   border: none;
@@ -21,9 +22,18 @@ textarea:focus {
   color: $light-color;
 }
 
+@mixin dark {
+  color: $dark-color;
+}
+
 .light-header {
   @include light;
   background-color: #aaa;
+}
+
+.dark-header {
+  @include dark;
+  background-color: #000;
 }
 
 .light-board {
@@ -31,19 +41,29 @@ textarea:focus {
   background-color: #ebebeb;
 }
 
+.dark-board {
+  @include dark;
+  background-color: #111
+}
+
 .light-list {
   @include light;
   background-color: #bbb;
 }
 
-button.light-list {
-  background-color: #111;
-  color: #eee;
+.dark-list {
+  @include dark;
+  background-color: #222;
 }
 
-input.light-list {
-  width: 100%;
-  box-sizing: border-box;
+button.light-list {
+  background-color: $light-color;
+  color: $dark-color
+}
+
+button.dark-list {
+  background-color: $dark-color;
+  color: $light-color
 }
 
 .light-card {
@@ -51,7 +71,15 @@ input.light-list {
   background-color: #ddd;
 }
 
+.dark-card {
+  @include dark;
+  background-color: #444;
+}
+
 button.light-card {
   border: 1px solid #444;
-  border-radius: $border-radius;
+}
+
+button.dark-card {
+  border: 1px solid #bbb;
 }

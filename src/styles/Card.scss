@@ -15,6 +15,7 @@
   min-width: 105px;
   button {
     margin: 0 .3em;
+    border-radius: base.$border-radius;
   }
   .delete-card {
     margin-right: 0;
@@ -63,4 +64,8 @@
 
 .more-close {
   margin: 1em;
+}
+
+textarea {
+  color: black !important;
 }
