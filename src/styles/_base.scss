@@ -1,4 +1,5 @@
 $border-radius: 5px;
+$button-radius: 3px;
 $light-color: #111;
 $dark-color: #eee;
 
@@ -12,10 +13,12 @@ input {
 
 input:focus {
   background-color: white;
+  color: black;
 }
 
 textarea:focus {
   background-color: white;
+  color: black;
 }
 
 @mixin light {
