@@ -83,6 +83,8 @@ const App = () => {
         return list;
       })
     );
+    setEditing(false);
+    setEditingList('');
   };
 
   const startEditCardTitle = (cardID, listID) => {
