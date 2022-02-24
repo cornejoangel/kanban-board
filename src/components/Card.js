@@ -131,7 +131,7 @@ const Card = (props) => {
               className={`more-close ${dark ? 'dark-card' : 'light-card'}`}
               onClick={closeMore}
             >
-              close
+              Close
             </button>
           </ReactModal>
         </li>
