@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdOutlineLightMode, MdOutlineDarkMode } from 'react-icons/md';
 import uniqid from 'uniqid';
 import List from './components/List';
 import './styles/normalize.css';
@@ -234,7 +234,11 @@ const App = () => {
           }`}
           onClick={() => toggleDark()}
         >
-          {dark ? 'make light' : 'make dark'}
+          {dark ? (
+            <MdOutlineLightMode className="light-svg" />
+          ) : (
+            <MdOutlineDarkMode className="dark-svg" />
+          )}
         </button>
       </header>
       <main className={`board ${dark ? 'dark-board' : 'light-board'}`}>

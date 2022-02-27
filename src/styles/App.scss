@@ -1,3 +1,4 @@
+@use 'base';
 body {
   font-size: 16px;
 }
@@ -51,4 +52,29 @@ input {
 
 button {
   cursor: pointer;
+}
+
+.theme-toggle {
+  background: inherit;
+  border: none;
+  padding: 0;
+  margin: .5em;
+}
+
+.light-svg {
+  color: #999;
+  font-size: 1.75em;
+}
+
+.light-svg:hover {
+  color: base.$dark-color;
+}
+
+.dark-svg {
+  color: #999;
+  font-size: 1.75em;
+}
+
+.dark-svg:hover {
+  color: base.$light-color;
 }
