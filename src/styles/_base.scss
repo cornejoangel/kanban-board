@@ -1,11 +1,13 @@
 $border-radius: 5px;
 $button-radius: 3px;
-$light-color: #111;
+$light-color: #282829;
 $dark-color: #eee;
 $font-main: 'Roboto', sans-serif;
 $dark-bg: radial-gradient(#08111f, #000);
 $dark-list: #1E1E1E;
 $dark-card: #393939;
+$light-bg: white;
+$light-list: #ebebeb;
 
 html {
   font-family: $font-main;
@@ -49,7 +51,7 @@ textarea:focus {
 
 .light-board {
   @include light;
-  background-color: #ebebeb;
+  background: $light-bg;
 }
 
 .dark-board {
@@ -60,7 +62,8 @@ textarea:focus {
 
 .light-list {
   @include light;
-  background-color: #bbb;
+  background: $light-list;
+  box-shadow: 0px 0px 3px black;
 }
 
 .dark-list {
@@ -80,7 +83,7 @@ button.dark-list {
 
 .light-card {
   @include light;
-  background-color: #ddd;
+  background: $light-bg;
 }
 
 .dark-card {
