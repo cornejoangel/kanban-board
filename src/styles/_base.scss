@@ -60,6 +60,16 @@ textarea:focus {
   background: $dark-bg;
 }
 
+.light-list-creator {
+  @include light;
+  background: inherit;
+}
+
+.dark-list-creator {
+  @include dark;
+  background: inherit;
+}
+
 .light-list {
   @include light;
   background: $light-list;
@@ -72,13 +82,11 @@ textarea:focus {
 }
 
 button.light-list {
-  background-color: $light-color;
-  color: $dark-color
+  background: $light-bg;
 }
 
 button.dark-list {
-  background-color: $dark-color;
-  color: $light-color
+  background: $dark-card;
 }
 
 .light-card {

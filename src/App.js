@@ -276,7 +276,13 @@ const App = () => {
             )}
           </Droppable>
         </DragDropContext>
-        <button type="button" className="list-creator" onClick={createList}>
+        <button
+          type="button"
+          className={`list-creator ${
+            dark ? 'dark-list-creator' : 'light-list-creator'
+          }`}
+          onClick={createList}
+        >
           <MdAdd className="list-creator-svg" />
         </button>
       </main>
