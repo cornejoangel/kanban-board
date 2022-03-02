@@ -9,14 +9,12 @@
   white-space: normal;
   border-radius: base.$border-radius;
   box-shadow: 0px 1px 3px #777;
-  min-height: 2em;
   position: relative;
 }
 
 .card-buttons {
   padding: 0;
   position: absolute;
-  top: .5em;
   right: .5em;
   button {
     margin: 0 .3em;
@@ -80,9 +78,9 @@ input.more-header {
 }
 
 .light-more-content {
-  background-color: #eee;
+  background-color: white;
 }
 
 .dark-more-content {
-  background-color: #444;
+  background: base.$dark-card;
 }

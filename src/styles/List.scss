@@ -4,9 +4,10 @@
   margin: 1em 0 1em 1em;
   padding: .5em;
   box-sizing: border-box;
-  display: block;
   position: relative;
-  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  max-height: 95%;
   border-radius: base.$border-radius;
 
   button {
@@ -26,14 +27,18 @@
 }
 
 .card-list {
+  margin-top: .5rem;
   display: flex;
   flex-direction: column;
   min-height: 10px;
+  max-height: 100%;
+  overflow: auto;
 }
 
 .card-creator {
   padding: 0 .5rem;
   margin-top: .5rem;
+  align-self: start;
 }
 
 .list-close {
