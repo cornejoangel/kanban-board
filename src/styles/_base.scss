@@ -63,11 +63,15 @@ textarea:focus {
 .light-list-creator {
   @include light;
   background: inherit;
+  box-shadow: 0px 0px 3px black;
+  border-radius: 3px;
 }
 
 .dark-list-creator {
   @include dark;
   background: inherit;
+  box-shadow: 0px 0px 3px #fff;
+  border-radius: 3px;
 }
 
 .light-list {
@@ -108,5 +112,6 @@ button.dark-card {
 }
 
 svg {
-  vertical-align: middle;
+  padding: .25rem;
+  display: block;
 }
