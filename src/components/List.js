@@ -39,6 +39,7 @@ const List = (props) => {
           <input
             type="text"
             value={title}
+            placeholder="Add a title..."
             className={`list-title ${dark ? 'dark-list' : 'light-list'}`}
             onChange={(e) => changeListTitle(id, e.target.value)}
           />
