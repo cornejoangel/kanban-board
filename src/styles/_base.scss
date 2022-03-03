@@ -3,7 +3,7 @@ $button-radius: 3px;
 $light-color: #282829;
 $dark-color: #eee;
 $font-main: 'Roboto', sans-serif;
-$dark-bg: linear-gradient(black, #08111f);
+$dark-bg: linear-gradient(black, #10213d);
 $dark-list: #1E1E1E;
 $dark-card: #393939;
 $light-bg: white;
@@ -83,6 +83,7 @@ textarea:focus {
 .dark-list {
   @include dark;
   background: $dark-list;
+  box-shadow: 0px 0px 3px #999;
 }
 
 button.light-list {
@@ -98,9 +99,17 @@ button.dark-list {
   background: $light-bg;
 }
 
+.light-card:hover {
+  background: $light-list;
+}
+
 .dark-card {
   @include dark;
   background: $dark-card;
+}
+
+.dark-card:hover {
+  background: $dark-list;
 }
 
 button.light-card {
