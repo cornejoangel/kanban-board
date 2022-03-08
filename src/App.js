@@ -107,6 +107,7 @@ const App = () => {
     if (e.key && e.key !== 'Enter') return;
     setEditing(false);
     setEditingList('');
+    setEditingEmpty(true);
     const l = { ...lists.find((list) => list.id === listID) };
     const c = { ...l.cards.find((card) => card.id === cardID) };
     if (c.title === '') {
@@ -148,7 +149,9 @@ const App = () => {
     const c = { ...l.cards.find((card) => card.id === cardID) };
     if (c.title !== '') {
       setEditingEmpty(false);
+      return;
     }
+    setEditingEmpty(true);
   };
 
   const changeDescription = (cardID, listID, value) => {
