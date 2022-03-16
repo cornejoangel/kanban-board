@@ -25,6 +25,7 @@ const List = (props) => {
     changeDescription,
     dark,
     blurHandler,
+    editingCard,
   } = props;
 
   let list = '';
@@ -73,13 +74,13 @@ const List = (props) => {
               </ul>
             )}
           </Droppable>
-          {/* this is an add card button that does nothing, but has an additional class */}
           {!editingEmpty && editingList === id && (
             <button
               type="button"
               className={`card-creator save-card ${
                 dark ? 'dark-list' : 'light-list'
               }`}
+              onClick={() => stopEditCardTitle({}, editingCard, editingList)}
             >
               <MdAdd className="card-creator-svg" />
             </button>
@@ -126,5 +127,6 @@ List.propTypes = {
   changeDescription: PropTypes.func,
   dark: PropTypes.bool,
   blurHandler: PropTypes.func,
+  editingCard: PropTypes.string,
 };
 export default List;

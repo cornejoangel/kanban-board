@@ -306,6 +306,7 @@ const App = () => {
                     changeDescription={changeDescription}
                     dark={dark}
                     blurHandler={blurHandler}
+                    editingCard={editingCard}
                   />
                 ))}
                 {provided.placeholder}
