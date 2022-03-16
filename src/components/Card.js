@@ -19,6 +19,7 @@ const Card = (props) => {
     description,
     changeDescription,
     dark,
+    blurHandler,
   } = props;
   const [showMore, setShowMore] = useState(false);
   const [mouseOver, setMouseOver] = useState(false);
@@ -64,7 +65,8 @@ const Card = (props) => {
               value={title}
               className={`card-name-edit ${dark ? 'dark-card' : 'light-card'}`}
               onChange={(e) => changeCardTitle(id, listID, e.target.value)}
-              onBlur={(e) => stopEditCardTitle(e, id, listID)}
+              // onBlur={(e) => stopEditCardTitle(e, id, listID)}
+              onBlur={(e) => blurHandler(e, id, listID)}
               onKeyDown={(e) => stopEditCardTitle(e, id, listID)}
             />
           )}
@@ -154,6 +156,7 @@ Card.propTypes = {
   description: PropTypes.string,
   changeDescription: PropTypes.func,
   dark: PropTypes.bool,
+  blurHandler: PropTypes.func,
 };
 
 export default Card;

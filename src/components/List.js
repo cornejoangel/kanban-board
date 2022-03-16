@@ -24,6 +24,7 @@ const List = (props) => {
     index,
     changeDescription,
     dark,
+    blurHandler,
   } = props;
 
   let list = '';
@@ -65,6 +66,7 @@ const List = (props) => {
                     description={card.description}
                     changeDescription={changeDescription}
                     dark={dark}
+                    blurHandler={blurHandler}
                   />
                 ))}
                 {listProvided.placeholder}
@@ -123,5 +125,6 @@ List.propTypes = {
   index: PropTypes.number,
   changeDescription: PropTypes.func,
   dark: PropTypes.bool,
+  blurHandler: PropTypes.func,
 };
 export default List;

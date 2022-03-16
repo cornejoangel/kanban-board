@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { MdAdd, MdOutlineLightMode, MdOutlineDarkMode } from 'react-icons/md';
 import uniqid from 'uniqid';
@@ -24,6 +24,10 @@ const App = () => {
     }
     return false;
   });
+  const [editingCard, setEditingCard] = useState('');
+  const [queueCard, setQueueCard] = useState(false);
+  const [queueList, setQueueList] = useState('');
+  const [doneBlurring, setDoneBlurring] = useState(true);
 
   useEffect(() => {
     localStorage.setItem('lists', JSON.stringify(lists));
@@ -31,7 +35,7 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem('dark', JSON.stringify(dark));
-  });
+  }, [dark]);
 
   const createList = () => {
     const newList = { id: uniqid(), title: '', cards: [] };
@@ -53,27 +57,6 @@ const App = () => {
     );
   };
 
-  const createCard = (listID) => {
-    const newCard = {
-      listID,
-      id: uniqid(),
-      title: '',
-      editingTitle: true,
-      description: '',
-    };
-    setLists(
-      lists.map((list) => {
-        if (list.id === listID) {
-          list.cards = list.cards.concat(newCard);
-        }
-        return list;
-      })
-    );
-    setEditing(true);
-    setEditingList(listID);
-    setEditingEmpty(true);
-  };
-
   const deleteCard = (cardID, listID) => {
     setLists(
       lists.map((list) => {
@@ -83,8 +66,6 @@ const App = () => {
         return list;
       })
     );
-    setEditing(false);
-    setEditingList('');
   };
 
   const startEditCardTitle = (cardID, listID) => {
@@ -101,6 +82,10 @@ const App = () => {
         return list;
       })
     );
+    setEditing(true);
+    setEditingList(listID);
+    setEditingCard(cardID);
+    setEditingEmpty(false);
   };
 
   const stopEditCardTitle = (e, cardID, listID) => {
@@ -108,6 +93,7 @@ const App = () => {
     setEditing(false);
     setEditingList('');
     setEditingEmpty(true);
+    setEditingCard('');
     const l = { ...lists.find((list) => list.id === listID) };
     const c = { ...l.cards.find((card) => card.id === cardID) };
     if (c.title === '') {
@@ -128,7 +114,54 @@ const App = () => {
         return list;
       })
     );
+    setDoneBlurring(true);
   };
+
+  const blurHandler = useCallback((e, cardID, listID) => {
+    stopEditCardTitle(e, cardID, listID);
+    setDoneBlurring(true);
+  }, []);
+
+  const createCard = useCallback(
+    (listID) => {
+      if (editing) {
+        setQueueCard(true);
+        setQueueList(listID);
+        setEditing(false);
+        setDoneBlurring(false);
+        blurHandler({}, editingCard, editingList);
+        return;
+      }
+      const newCard = {
+        listID,
+        id: uniqid(),
+        title: '',
+        editingTitle: true,
+        description: '',
+      };
+      setLists(
+        lists.map((list) => {
+          if (list.id === listID) {
+            list.cards = list.cards.concat(newCard);
+          }
+          return list;
+        })
+      );
+      setEditing(true);
+      setEditingList(listID);
+      setEditingEmpty(true);
+      setEditingCard(newCard.id);
+    },
+    [blurHandler, editing, editingCard, editingList, lists]
+  );
+
+  useEffect(() => {
+    if (queueCard && doneBlurring) {
+      createCard(queueList);
+      setQueueCard(false);
+      setQueueList('');
+    }
+  }, [queueCard, queueList, doneBlurring, createCard]);
 
   const changeCardTitle = (cardID, listID, value) => {
     setLists(
@@ -272,6 +305,7 @@ const App = () => {
                     index={index}
                     changeDescription={changeDescription}
                     dark={dark}
+                    blurHandler={blurHandler}
                   />
                 ))}
                 {provided.placeholder}
