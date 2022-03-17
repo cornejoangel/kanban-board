@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { MdAdd, MdOutlineLightMode, MdOutlineDarkMode } from 'react-icons/md';
+import { FaGithub } from 'react-icons/fa';
 import uniqid from 'uniqid';
 import List from './components/List';
 import './styles/normalize.css';
@@ -283,6 +284,18 @@ const App = () => {
   board = (
     <div>
       <header className={dark ? 'dark-header' : 'light-header'}>
+        <a
+          href="https://github.com/cornejoangel/kanban-board"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <button
+            type="button"
+            className={`github ${dark ? 'dark-github' : 'light-github'}`}
+          >
+            <FaGithub className="github-svg" />
+          </button>
+        </a>
         <button
           type="button"
           className={`theme-toggle ${

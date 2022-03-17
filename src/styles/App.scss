@@ -56,7 +56,7 @@ button {
   cursor: pointer;
 }
 
-.theme-toggle {
+header button{
   background: inherit;
   border: none;
   padding: 0;
@@ -79,4 +79,20 @@ button {
 
 .dark-svg:hover {
   color: base.$light-color;
+}
+
+.github {
+  color: #999;
+}
+
+.github-svg {
+  font-size: 1.5em;
+}
+
+.light-github:hover {
+  color: base.$light-color;
+}
+
+.dark-github:hover {
+  color: base.$dark-color;
 }
