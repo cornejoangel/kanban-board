@@ -26,9 +26,27 @@ input:focus {
   color: black;
 }
 
+input.dark-list:focus {
+  background-color: black !important;
+  color: white !important;
+  outline: none;
+}
+
 textarea:focus {
   background-color: white !important;
   color: black;
+}
+
+textarea.dark-card:focus {
+  background-color: black !important;
+  color: white !important;
+  outline: none;
+}
+
+input.dark-card:focus {
+  background-color: black !important;
+  color: white !important;
+  outline: none;
 }
 
 @mixin light {
