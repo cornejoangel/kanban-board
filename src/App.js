@@ -28,6 +28,7 @@ const App = () => {
   const [queueCard, setQueueCard] = useState(false);
   const [queueList, setQueueList] = useState('');
   const [doneBlurring, setDoneBlurring] = useState(true);
+  const [queueEditCard, setQueueEditCard] = useState('');
 
   useEffect(() => {
     localStorage.setItem('lists', JSON.stringify(lists));
@@ -66,26 +67,6 @@ const App = () => {
         return list;
       })
     );
-  };
-
-  const startEditCardTitle = (cardID, listID) => {
-    setLists(
-      lists.map((list) => {
-        if (list.id === listID) {
-          list.cards = list.cards.map((card) => {
-            if (card.id === cardID) {
-              card.editingTitle = true;
-            }
-            return card;
-          });
-        }
-        return list;
-      })
-    );
-    setEditing(true);
-    setEditingList(listID);
-    setEditingCard(cardID);
-    setEditingEmpty(false);
   };
 
   const stopEditCardTitle = (e, cardID, listID) => {
@@ -162,6 +143,45 @@ const App = () => {
       setQueueList('');
     }
   }, [queueCard, queueList, doneBlurring, createCard]);
+
+  const startEditCardTitle = useCallback(
+    (cardID, listID) => {
+      if (editing) {
+        setQueueEditCard(cardID);
+        setQueueList(listID);
+        setEditing(false);
+        setDoneBlurring(false);
+        blurHandler({}, editingCard, editingList);
+        return;
+      }
+      setLists(
+        lists.map((list) => {
+          if (list.id === listID) {
+            list.cards = list.cards.map((card) => {
+              if (card.id === cardID) {
+                card.editingTitle = true;
+              }
+              return card;
+            });
+          }
+          return list;
+        })
+      );
+      setEditing(true);
+      setEditingList(listID);
+      setEditingCard(cardID);
+      setEditingEmpty(false);
+    },
+    [lists, editing]
+  );
+
+  useEffect(() => {
+    if (queueEditCard !== '' && doneBlurring) {
+      startEditCardTitle(queueEditCard, queueList);
+      setQueueEditCard('');
+      setQueueList('');
+    }
+  }, [startEditCardTitle, queueEditCard, queueList, doneBlurring]);
 
   const changeCardTitle = (cardID, listID, value) => {
     setLists(
