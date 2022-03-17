@@ -65,7 +65,6 @@ const Card = (props) => {
               value={title}
               className={`card-name-edit ${dark ? 'dark-card' : 'light-card'}`}
               onChange={(e) => changeCardTitle(id, listID, e.target.value)}
-              // onBlur={(e) => stopEditCardTitle(e, id, listID)}
               onBlur={(e) => blurHandler(e, id, listID)}
               onKeyDown={(e) => stopEditCardTitle(e, id, listID)}
             />

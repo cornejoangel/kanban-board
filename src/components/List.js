@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { MdClose, MdAdd } from 'react-icons/md';
 import PropTypes from 'prop-types';
@@ -28,6 +28,14 @@ const List = (props) => {
     editingCard,
   } = props;
 
+  const listNameInput = useRef();
+
+  const handleKey = (e) => {
+    if (e.key === 'Enter') {
+      listNameInput.current.blur();
+    }
+  };
+
   let list = '';
   list = (
     <Draggable draggableId={id} index={index}>
@@ -40,10 +48,12 @@ const List = (props) => {
         >
           <input
             type="text"
+            ref={listNameInput}
             value={title}
             placeholder="Add a title..."
             className={`list-title ${dark ? 'dark-list' : 'light-list'}`}
             onChange={(e) => changeListTitle(id, e.target.value)}
+            onKeyDown={(e) => handleKey(e)}
           />
           <Droppable droppableId={id} direction="vertical" type="row">
             {(listProvided) => (
