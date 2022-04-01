@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Kanban Board
+Kanban Board is a minimalist [kanban board](https://en.wikipedia.org/wiki/Kanban_board) app developed by **Angel Cornejo**. It is a React single page app styled with Sass.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**[VIEW IT LIVE HERE](https://cornejoangel.github.io/kanban-board/)**
 
-## Available Scripts
+## Features
+- Implements full Create-Read-Update-Delete functionality for both lists and cards using local storage
+- Intuitive interface utilizing react-beautiful-dnd library: users can switch the order of lists, move cards within a list or to another
+- Card descriptions can be set in a pop-up modal
+- Optional dark mode
 
-In the project directory, you can run:
+## A Brief Tour
+1. When you first open the app you are greeted by an empty page with a "+" button. Click on the button to create a list.
+2. Once you have a list you can optionally give it a title. You are free to create as many lists as you like.
+3. You can change the order of your lists by dragging and dropping them.
+4. Delete a list by clicking on the "x" in its top right corner.
+5. Click on the "+" button inside a list to create a card.
+6. Give the card a title (or else the card will be deleted!). Press enter to finish editing the card's title. You can make as many cards as you like.
+7. Drag and drop cards to change their order within their list, or move them to another list.
+8. Hover your cursor over a card to reveal the card's options - edit name, expand, and delete. The expand button will bring up a modal with the card's name at the top and a text area where you can add more information about that card in the middle.
+9. Click on the moon icon in the top right corner of the page to switch to dark mode. Click on the sun icon that took its place to go back to light mode.
+10. If you refresh your page you will see that everything is as you left it, including your choice of light or dark mode!
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Made with
+- [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd) for all of the drag-and-drop functionality. This is made by Atlassian, who make [Trello](https://trello.com), which inspired this app!
+- [react-modal](https://github.com/reactjs/react-modal) for the expanded card view modals.
