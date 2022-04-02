@@ -99,10 +99,13 @@ const App = () => {
     setDoneBlurring(true);
   };
 
-  const blurHandler = useCallback((e, cardID, listID) => {
-    stopEditCardTitle(e, cardID, listID);
-    setDoneBlurring(true);
-  }, []);
+  const blurHandler = useCallback(
+    (e, cardID, listID) => {
+      stopEditCardTitle(e, cardID, listID);
+      setDoneBlurring(true);
+    },
+    [lists]
+  );
 
   const createCard = useCallback(
     (listID) => {
